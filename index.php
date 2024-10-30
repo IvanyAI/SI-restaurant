@@ -18,18 +18,20 @@
     <?php include "sidebar.php";?>
 <!-- sidebar -->
  <!--CONTAINER  -->
- <div class="col-lg-9 mt-3">
- <div class="card">
-  <div class="card-header">
-    Halaman Utama
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">Ini adalah bagian Halaman Utama</h5>
-    <p class="card-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, quasi non? Minus, iure. Magnam repellendus, perferendis dolorem consequuntur quibusdam vero earum sint dignissimos aspernatur saepe recusandae quasi quod, ratione fuga!</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
- </div>
+  <?php
+  if (isset($_GET['x']) && $_GET['x']=='halamanutama'){
+    include "home.php";
+  }elseif (isset($_GET['x']) && $_GET['x']=='menu'){
+    include "menu.php";
+  }
+  elseif (isset($_GET['x']) && $_GET['x']=='kategori'){
+    include "kategori.php";
+  }elseif (isset($_GET['x']) && $_GET['x']=='laporan'){
+    include "laporan.php";
+  }elseif (isset($_GET['x']) && $_GET['x']=='akun'){
+    include "akun.php";
+  }
+  ?>
  <!--CONTAINER  -->
 </div>
 <div class="fixed-bottom text-center mb-2">
