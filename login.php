@@ -83,6 +83,7 @@
   <form class="needs-validation" novalidate >
     <i class="bi bi-tags fs-1"></i>
     <h1 class="h3 mb-3 fw-normal">Masuk Disini</h1>
+    <p>Tidak mempunyai akun? <a href=".">Buat Akun</a></p>
     <div class="form-floating">
       <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
       <label for="floatingInput">Email address</label>

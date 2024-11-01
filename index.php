@@ -30,6 +30,8 @@
     include "laporan.php";
   }elseif (isset($_GET['x']) && $_GET['x']=='akun'){
     include "akun.php";
+  }else {
+    include "home.php";
   }
   ?>
  <!--CONTAINER  -->
