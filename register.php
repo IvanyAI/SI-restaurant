@@ -11,7 +11,7 @@ if(!empty($_SESSION['email_rm'])){
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.122.0">
-    <title>SIRUMA - Masuk</title>
+    <title>SIRUMA - DAFTAR</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
     <link rel="stylesheet" href="assets/css/login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
@@ -85,10 +85,15 @@ if(!empty($_SESSION['email_rm'])){
   </head>
   <body class="d-flex align-items-center text-center  py-4 bg-body-tertiary">  
 <main class="form-signin w-100 m-auto ">
-  <form class="needs-validation" novalidate action="proses/login.php" method="post">
+  <form class="needs-validation" novalidate action="proses/register.php" method="post">
     <i class="bi bi-tags fs-1"></i>
-    <h1 class="h3 mb-3 fw-normal">Masuk Disini</h1>
-    <p>Tidak mempunyai akun? <a href="register">Buat Akun</a></p>
+    <h1 class="h3 mb-3 fw-normal">Daftar Disini</h1>
+    <div class="form-floating">
+      <input name="nama" type="name" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+      <label for="floatingInput">Nama</label>
+      <div class="invalid-feedback">
+      Masukkan nama yang benar!
+    </div>
     <div class="form-floating">
       <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
       <label for="floatingInput">Alamat email</label>
@@ -104,13 +109,8 @@ if(!empty($_SESSION['email_rm'])){
     </div>
     </div>
 
-    <div class="form-check text-start my-3">
-      <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-      <label class="form-check-label" for="flexCheckDefault">
-        Ingat Saya
-      </label>
-    </div>
-    <button class="btn btn-primary w-100 py-2" type="submit" name="submit_validate" value="abc">Masuk</button>
+    <button class="btn btn-primary w-100 py-2" type="submit" name="submit_validate" value="abc">Daftar</button>
+    <p class="mt-7">Masuk disini<a href="login" >Masuk</a></p>
     <p class="mt-5 mb-3 text-body-secondary">&copy; 2023-2024</p>
   </form>
 </main>

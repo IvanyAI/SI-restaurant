@@ -20,6 +20,8 @@
     include "login.php";
   }elseif (isset($_GET['x']) && $_GET['x']=='logout'){
     include "proses/logout.php";
+  }elseif (isset($_GET['x']) && $_GET['x']=='register'){
+    include "register.php";
   }else {
     $page = 'home.php';
     include "main.php";
