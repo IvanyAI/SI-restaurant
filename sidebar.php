@@ -14,9 +14,14 @@
           <li class="nav-item">
             <a class="nav-link  ps-2 <?php echo (isset ($_GET['x']) && $_GET['x']=='halamanutama') || !isset($_GET['x']) ? 'active link-light' : 'link-dark' ; ?>" aria-current="page" href="halamanutama"><i class="bi bi-kanban"></i> Halaman Utama</a>
           </li>
+          <?php if($hasil['level']==2){?>
+          <li class="nav-item">
+            <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='pencatatan')? 'active link-light' : 'link-dark' ; ?>" href="pencatatan"><i class="bi bi-clipboard-check"></i> Pencatatan</a>
+          </li><?php } ?>
+          <?php if($hasil['level']==1){?>
           <li class="nav-item">
             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='menu')? 'active link-light' : 'link-dark' ; ?>" href="menu"><i class="bi bi-list"></i> Daftar Menu</a>
-          </li>
+            </li>
           <li class="nav-item">
             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='kategori') ? 'active link-light' : 'link-dark' ; ?>" href="kategori"><i class="bi bi-card-list"></i> Kategori Menu</a>
           </li>
@@ -26,6 +31,7 @@
           <li class="nav-item">
             <a class="nav-link ps-2 <?php echo (isset($_GET['x']) && $_GET['x']=='laporan') ? 'active link-light' : 'link-dark' ; ?>" href="laporan"><i class="bi bi-bar-chart"></i> Laporan</a>
           </li>
+          <?php }?>
         </ul>
       </div>
     </div>

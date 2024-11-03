@@ -8,6 +8,7 @@ if (!empty($_POST['submit_validate'])){
   $hasil = mysqli_fetch_array($query); 
   if ($hasil){ 
     $_SESSION['email_rm'] = $email;
+    $_SESSION['level_rm'] = $hasil['level'];
     header('location:../home');
   }else { ?>
   <script>

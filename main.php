@@ -1,8 +1,12 @@
 <?php
-session_start();
+// session_start();
 if(empty($_SESSION['email_rm'])){
   header('location:login');
 }
+include 'proses/connect.php';
+$query = mysqli_query($db,"SELECT * FROM tb_akun where email = '$_SESSION[email_rm]'");
+$hasil = mysqli_fetch_array($query);
+
 ?>
 
 
