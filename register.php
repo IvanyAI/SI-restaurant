@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 if(!empty($_SESSION['email_rm'])){
   header('location:home');
 }
@@ -110,7 +110,7 @@ if(!empty($_SESSION['email_rm'])){
     </div>
 
     <button class="btn btn-primary w-100 py-2" type="submit" name="submit_validate" value="abc">Daftar</button>
-    <p class="mt-7">Masuk disini<a href="login" >Masuk</a></p>
+    <p class="mt-7">Masuk disini <a href="login" >Masuk</a></p>
     <p class="mt-5 mb-3 text-body-secondary">&copy; 2023-2024</p>
   </form>
 </main>
