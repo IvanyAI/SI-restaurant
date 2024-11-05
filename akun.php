@@ -253,6 +253,38 @@ foreach($data as $key => $value){
   </div>
 </div>
 <!-- End Hapus Modal -->
+  <!--  Reseet Password Modal -->
+<div class="modal fade" id="ModalResetPassword<?php echo $row['id']?>"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+       <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data Akun</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form class="needs-validation" novalidate action="proses/reset_password.php" method="post">
+      <input type="hidden" value="<?php echo $row['id']?>" name="id">
+      <div class="col-lg-12">
+        <?php
+        if ($row['email']==$_SESSION['email_rm']){
+          echo "<div class='alert alert-danger'>Anda tidak dapat mereset kata sandi akun sendiri</div>";
+        }else {
+          echo "Apakah anda yakin ingin mereset password Akun <b>$row[nama]</b> menjadi default <b>12345</b>";
+        }
+        ?>
+      </div>
+<div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success" name="validate_input" value="1234" <?php echo ($row['email']==$_SESSION['email_rm']) ? 'disabled' : '' ?>>Reset</button>
+      </div>
+      </div>
+</form>
+      
+      
+    </div>
+  </div>
+</div>
+<!-- END RESET Password Modal -->
  <?php
 }
  if(empty($result)){
@@ -295,7 +327,8 @@ foreach($data as $key => $value){
       <td class="d-flex">
         <button class="btn btn-info btn-sm me-1"data-bs-toggle="modal" data-bs-target="#ModalView<?php echo $row['id']?>"><i class="bi bi-eye"></i></button>
         <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal" data-bs-target="#ModalEdit<?php echo $row['id']?>"><i class="bi bi-pencil"></i></button>
-        <button class="btn btn-danger btn-sm  " data-bs-toggle="modal" data-bs-target="#ModalHapus<?php echo $row['id']?>"><i class="bi bi-trash3"></i></button>
+        <button class="btn btn-danger btn-sm me-1  " data-bs-toggle="modal" data-bs-target="#ModalHapus<?php echo $row['id']?>"><i class="bi bi-trash3"></i></button>
+        <button class="btn btn-secondary btn-sm  " data-bs-toggle="modal" data-bs-target="#ModalResetPassword<?php echo $row['id']?>"><i class="bi bi-key-fill"></i></i></button>
       </td>
     </tr>
     <?php
