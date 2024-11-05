@@ -35,7 +35,7 @@ $hasil = mysqli_fetch_array($query);
   ?>
  <!--CONTAINER  -->
 </div>
-<div class="fixed-bottom text-center mb-2">
+<div class="fixed-bottom text-center py-2 bg-light ">
   Copyright 2024 Ivany
 </div>
 </div>

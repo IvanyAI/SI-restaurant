@@ -59,7 +59,7 @@ while($record = mysqli_fetch_array($query)) {
 <div class="col-lg-4">
 <div class="form-floating mb-3">
 <select class="form-select" aria-label="Default select example" name="level" required>
-  <option selected hidden value="0">Pilih level hak akses</option>
+  <option selected hidden value="">Pilih level hak akses</option>
   <option value="1">Owner</option>
   <option value="2">Kasir</option>
   <option value="3">Pelanggan</option>
@@ -162,7 +162,7 @@ foreach($data as $key => $value){
         <input type="hidden" value="<?php echo $row['id']?>" name="id" >
         <div class="col-lg-6">
       <div class="form-floating mb-3">
-  <input type="text" class="form-control" id="floatingInput"  placeholder="Nama kamu" name="nama" value="<?php echo $row['nama']?>" required>
+  <input <?php echo ($row['email']==$_SESSION['email_rm']) ? 'disabled' : '' ?> type="text" class="form-control" id="floatingInput"  placeholder="Nama kamu" name="nama" value="<?php echo $row['nama']?>" required>
   <label for="floatingInput">Nama</label>
   <div class="invalid-feedback">
      Masukkan Nama!
@@ -171,7 +171,7 @@ foreach($data as $key => $value){
 </div>
 <div class="col-lg-6">
 <div class="form-floating mb-3">
-  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"  name="email" value="<?php echo $row['email']?>" required>
+  <input <?php echo ($row['email']==$_SESSION['email_rm']) ? 'disabled' : '' ?> type="email" class="form-control" id="floatingInput" placeholder="name@example.com"  name="email" value="<?php echo $row['email']?>" required>
   <label for="floatingInput">Email</label>
   <div class="invalid-feedback">
       Masukkan Email yang valid!
@@ -182,7 +182,7 @@ foreach($data as $key => $value){
       <div class="row">
         <div class="col-lg-8">
       <div class="form-floating mb-3">
-  <input type="NUMBER" class="form-control" id="floatingInput" placeholder="08xxx" name="nohp" value="<?php echo $row['nohp']?>" required>
+  <input <?php echo ($row['email']==$_SESSION['email_rm']) ? 'disabled' : '' ?> type="NUMBER" class="form-control" id="floatingInput" placeholder="08xxx" name="nohp" value="<?php echo $row['nohp']?>" required>
   <label for="floatingInput">No HP</label>
   <div class="invalid-feedback">
       Masukkan No HP!
@@ -191,7 +191,7 @@ foreach($data as $key => $value){
 </div>
 <div class="col-lg-4">
 <div class="form-floating mb-3">
-  <select class="form-select" aria-label="Default select example" name="level" id="" required>
+  <select <?php echo ($row['email']==$_SESSION['email_rm']) ? 'disabled' : '' ?> class="form-select" aria-label="Default select example" name="level" id="" required>
 <?php
 $data = array("Admin","Kasir","Pelanggan");
 foreach($data as $key => $value){
@@ -212,7 +212,7 @@ foreach($data as $key => $value){
 </div>
 <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="validate_input" value="1234">Save changes</button>
+        <button <?php echo ($row['email']==$_SESSION['email_rm']) ? ' class="btn btn-danger" disabled' : '' ?> type="submit" class="btn btn-primary" name="validate_input" value="1234">Save changes</button>
       </div>
 </form>
       </div>
