@@ -84,11 +84,15 @@ if (!empty($_SESSION['email_rm'])) {
 <!-- Custom styles for this template -->
 </head>
 
-<body class="d-flex align-items-center text-center  py-4 bg-body-tertiary">
-  <main class="form-signin w-100 m-auto ">
+<body class="d-flex align-items-center text-center  py-4 bg-body-secondary">
+  <main class="border rounded bg-light form-signin w-100 m-auto border border-primary-substle ">
     <form class="needs-validation" novalidate action="proses/register.php" method="post">
       <i class="bi bi-tags fs-1"></i>
-      <h1 class="h3 mb-3 fw-normal">Daftar Disini</h1>
+      <h2>SIRUMA</h2>
+      <h5>
+        <P>Sistem Informasi Rumah Makan</P>
+      </h5>
+      <h5 class="mb-3 mt-8 fw-normal 2rem">Daftar Disini</h5>
       <div class="form-floating">
         <input name="nama" type="name" class="form-control" id="floatingInput" placeholder="name@example.com" required>
         <label for="floatingInput">Nama</label>
@@ -114,7 +118,7 @@ if (!empty($_SESSION['email_rm'])) {
 
         <button class="btn btn-primary w-100 py-2" type="submit" name="submit_validate" value="abc">Daftar</button>
         <p class="mt-7">Masuk disini <a href="login">Masuk</a></p>
-        <p class="mt-5 mb-3 text-body-secondary">&copy; 2023-2024</p>
+        <p class="mt-5 mb-3 text-body-secondary">&copy; 2023-2024 Ivany</p>
     </form>
   </main>
   <script>

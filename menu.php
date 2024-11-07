@@ -65,7 +65,7 @@ while ($record = mysqli_fetch_array($query)) {
                   <div class="col-lg-6">
                     <div class="form-floating mb-3">
                       <input type="text" class="form-control" id="floatingInput" placeholder="keterangan"
-                        name="kategori">
+                        name="kategori" required>
                       <label for="floatingInput">Kategori Makanan</label>
                       <div class="invalid-feedback">
                         Isi Kategori!
