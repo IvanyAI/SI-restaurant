@@ -94,7 +94,7 @@ if (!empty($_SESSION['email_rm'])) {
       </h5>
 
 
-      <h5 class=" mb-3 mt-8 fw-normal 2rem">Masuk Disini</h5>
+      <!-- <h5 class=" mb-3 mt-8 fw-normal 2rem">Masuk Disini</h5> -->
 
       <div class="form-floating">
         <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com"

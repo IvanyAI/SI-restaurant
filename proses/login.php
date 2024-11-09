@@ -9,6 +9,7 @@ if (!empty($_POST['submit_validate'])) {
   if ($hasil) {
     $_SESSION['email_rm'] = $email;
     $_SESSION['level_rm'] = $hasil['level'];
+    $_SESSION['id_rm'] = $hasil['id'];
     header('location:../home');
   } else { ?>
     <script>
