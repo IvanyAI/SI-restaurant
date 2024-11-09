@@ -1,10 +1,11 @@
 <?php
 include("proses/connect.php");
 date_default_timezone_set('Asia/Jakarta');
-$query = mysqli_query($db, "SELECT tb_transaksi.*,nama, SUM(harga*jumlah) AS harganya FROM tb_transaksi LEFT JOIN tb_akun ON tb_akun.id = tb_transaksi.kasir
+$query = mysqli_query($db, "SELECT tb_transaksi.*,tb_bayar.*, nama, SUM(harga*jumlah) AS harganya FROM tb_transaksi LEFT JOIN tb_akun ON tb_akun.id = tb_transaksi.kasir
 LEFT JOIN tb_list_transaksi on tb_list_transaksi.transaksi = tb_transaksi.id_transaksi
 LEFT JOIN tb_menu ON tb_menu.id = tb_list_transaksi.menu
-GROUP BY id_transaksi");
+LEFT JOIN tb_bayar ON tb_bayar.id_bayar = tb_transaksi.id_transaksi
+GROUP BY id_transaksi ORDER BY waktu_transaksi DESC");
 while ($record = mysqli_fetch_array($query)) {
   $result[] = $record;
 }
@@ -46,17 +47,6 @@ while ($record = mysqli_fetch_array($query)) {
                       <label for="pelanggan">Pelanggan</label>
                       <div class="invalid-feedback">
                         Masukkan Nama Pelanggan!
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-lg-12">
-                    <div class="form-floating mb-3">
-                      <input type="text" class="form-control" id="catatan" placeholder="catatan" name="catatan">
-                      <label for="catatan">Catatan</label>
-                      <div class="invalid-feedback">
-                        Masukkan Catatan!
                       </div>
                     </div>
                   </div>
@@ -104,18 +94,6 @@ while ($record = mysqli_fetch_array($query)) {
                         <label for="pelanggan">Pelanggan</label>
                         <div class="invalid-feedback">
                           Masukkan Nama Pelanggan!
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-12">
-                      <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="catatan" placeholder="catatan" name="catatan"
-                          value="<?php echo $row['catatan'] ?>">
-                        <label for="catatan">Catatan</label>
-                        <div class="invalid-feedback">
-                          Masukkan Catatan!
                         </div>
                       </div>
                     </div>
@@ -196,18 +174,22 @@ while ($record = mysqli_fetch_array($query)) {
                   </td>
                   <td><?php echo number_format((int) $row['harganya'], 0, ',', '.') ?></td>
                   <td><?php echo $row['nama'] ?></td>
-                  <td><?php echo $row['status'] ?></td>
+                  <td><?php echo (!empty($row['id_bayar'])) ? "<span class='badge text-bg-success'>dibayar</span>" : " "; ?>
+                  </td>
                   <td><?php echo $row['waktu_transaksi'] ?></td>
                   <td>
                     <div class="d-flex">
                       <a class="btn btn-info btn-sm me-1"
                         href="./?x=pencatatanitem&pencatatan=<?php echo $row['id_transaksi'] . "&pelanggan=" . $row['pelanggan'] ?>"><i
                           class="bi bi-eye"></i></a>
-                      <button class="btn btn-warning btn-sm me-1" data-bs-toggle="modal"
-                        data-bs-target="#ModalEditPencatatan<?php echo $row['id_transaksi'] ?>"><i
+                      <button
+                        class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-warning"; ?>  "
+                        data-bs-toggle="modal" data-bs-target="#ModalEditTransaksiItem<?php echo $row['id_transaksi'] ?>"><i
                           class="bi bi-pencil"></i></button>
-                      <button class="btn btn-danger btn-sm me-1  " data-bs-toggle="modal"
-                        data-bs-target="#ModalHapusTransaksi<?php echo $row['id_transaksi'] ?>"><i
+                      <button
+                        class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-danger"; ?> "
+                        data-bs-toggle="modal"
+                        data-bs-target="#ModalHapusTransaksiItem<?php echo $row['id_transaksi'] ?>"><i
                           class="bi bi-trash3"></i></button>
                     </div>
                   </td>
