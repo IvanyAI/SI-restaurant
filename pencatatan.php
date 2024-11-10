@@ -69,7 +69,7 @@ while ($record = mysqli_fetch_array($query)) {
         <!-- View Modal -->
         <!-- End View Modal -->
         <!--  Edit Modal -->
-        <div class="modal fade" id="ModalEditPencatatan<?php echo $row['id_transaksi'] ?>" tabindex=" -1"
+        <div class="modal fade" id="ModalEditTransaksi<?php echo $row['id_transaksi'] ?>" tabindex=" -1"
           aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-xl modal-fullscreen-md-down">
             <div class="modal-content">
@@ -179,17 +179,16 @@ while ($record = mysqli_fetch_array($query)) {
                   <td><?php echo $row['waktu_transaksi'] ?></td>
                   <td>
                     <div class="d-flex">
-                      <a class="btn btn-info btn-sm me-1"
+                      <a class="btn btn-info me-1"
                         href="./?x=pencatatanitem&pencatatan=<?php echo $row['id_transaksi'] . "&pelanggan=" . $row['pelanggan'] ?>"><i
                           class="bi bi-eye"></i></a>
                       <button
-                        class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-warning"; ?>  "
-                        data-bs-toggle="modal" data-bs-target="#ModalEditTransaksiItem<?php echo $row['id_transaksi'] ?>"><i
+                        class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary me-1 disabled" : "btn btn-warning"; ?>  "
+                        data-bs-toggle="modal" data-bs-target="#ModalEditTransaksi<?php echo $row['id_transaksi'] ?>"><i
                           class="bi bi-pencil"></i></button>
                       <button
-                        class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary btn-sm me-1 disabled" : "btn btn-danger"; ?> "
-                        data-bs-toggle="modal"
-                        data-bs-target="#ModalHapusTransaksiItem<?php echo $row['id_transaksi'] ?>"><i
+                        class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary me-1 disabled" : "btn btn-danger"; ?> "
+                        data-bs-toggle="modal" data-bs-target="#ModalHapusTransaksi<?php echo $row['id_transaksi'] ?>"><i
                           class="bi bi-trash3"></i></button>
                     </div>
                   </td>

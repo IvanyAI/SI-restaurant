@@ -35,6 +35,14 @@ if (isset($_GET['x']) && $_GET['x'] == 'halamanutama') {
     $page = 'home.php';
     include "main.php";
   }
+} elseif (isset($_GET['x']) && $_GET['x'] == 'viewitem') {
+  if ($_SESSION['level_rm'] == 1) {
+    $page = 'viewitem.php';
+    include "main.php";
+  } else {
+    $page = 'home.php';
+    include "main.php";
+  }
 } elseif (isset($_GET['x']) && $_GET['x'] == 'pencatatan') {
   if ($_SESSION['level_rm'] == 2) {
     $page = 'pencatatan.php';
