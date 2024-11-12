@@ -1,3 +1,9 @@
+<?php
+include("proses/connect.php");
+$query = mysqli_query($db, "SELECT * FROM tb_akun WHERE email='$_SESSION[email_rm]'");
+$record = mysqli_fetch_array($query);
+?>
+
 <nav class="navbar navbar-expand bg-body-tertiary sticky-top">
   <div class="container-lg">
     <a class="navbar-brand" href="."><i class="bi bi-tags"></i> Rumah Makan</a>
@@ -8,7 +14,8 @@
             <b><?php echo $hasil['nama']; ?></b>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Profile</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#ModalUbahProfile"><i
+                  class="bi bi-person"></i> Profile </a></li>
             <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#ModalUbahPassword"><i
                   class="bi bi-key"></i> Ubah Password </a></li>
             <li><a class="dropdown-item" href="logout"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
@@ -74,6 +81,63 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary" name="edit_pass_validate" value="1234">Save changes</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- End Edit Modal -->
+<!--  Edit Profie Modal -->
+<div class="modal fade" id="ModalUbahProfile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-fullscreen-md-down">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ubah Profile Akun</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form class="needs-validation" novalidate action="proses/edit_profile.php" method="post">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-floating mb-3">
+                <input type="email" disabled class="form-control" id="floatingInput" placeholder="name@example.com"
+                  name="email" value="<?php echo $_SESSION['email_rm'] ?>" required>
+                <label for="floatingInput">Email</label>
+                <div class="invalid-feedback">
+                  Masukkan Email yang valid!
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-floating mb-3">
+                <input type="text" class="form-control" id="floatingPassword" name="nama" required
+                  value="<?php echo $record['nama'] ?>">
+                <label for="floatingInput">Nama Baru</label>
+                <div class="invalid-feedback">
+                  Masukkan Nama!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+
+            <div class="col-lg-12">
+              <div class="form-floating mb-3">
+                <input type="number" class="form-control" id="floatingPassword" name="nohp" required
+                  value="<?php echo $record['nohp'] ?>">
+                <label for="floatingInput">No Hp</label>
+                <div class="invalid-feedback">
+                  Masukkan No Hp baru!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" name="edit_profile_validate" value="1234">Save
+              changes</button>
           </div>
         </form>
       </div>

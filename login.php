@@ -87,7 +87,7 @@ if (!empty($_SESSION['email_rm'])) {
 <body class="d-flex align-items-center text-center  py-4 bg-body-secondary ">
   <main class="border rounded bg-light form-signin w-100 m-auto border border-primary-substle ">
     <form class="needs-validation" novalidate action="proses/login.php" method="post">
-      <i class="bi bi-tags fs-1"></i>
+      <img style="width:70px" src="assets/img/logo3fix.png" alt="">
       <h2>SIRUMA</h2>
       <h5>
         <P>Sistem Informasi Rumah Makan</P>
