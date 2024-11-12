@@ -4,8 +4,27 @@ $query = mysqli_query($db, "SELECT * FROM tb_menu");
 while ($row = mysqli_fetch_array($query)) {
   $result[] = $row;
 }
-?>
+$query_chart = mysqli_query($db, "SELECT nama_menu, tb_menu.id,SUM(tb_list_transaksi.jumlah) AS total_jumlah FROM tb_menu
+LEFT JOIN tb_list_transaksi ON tb_menu.id = tb_list_transaksi.menu
+GROUP BY tb_menu.id
+ORDER BY tb_menu.id ASC ");
+$result_chart = array();
 
+while ($record_chart = mysqli_fetch_array($query_chart)) {
+  $result_chart[] = $record_chart;
+}
+$array_menu = array_column($result_chart, "nama_menu");
+$array_menu_quote = array_map(function ($menu) {
+  return "'" . $menu . "'";
+}, $array_menu);
+$string_menu = implode(",", $array_menu_quote);
+// echo $string_menu . "\n";
+$array_jumlah_transaksi = array_column($result_chart, "total_jumlah");
+$string_jumlah_pesanan = implode(',', $array_jumlah_transaksi);
+// echo $string_jumlah_pesanan;
+
+?>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <div class="col-lg-9 mt-3">
   <!-- Carousel -->
   <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
@@ -49,6 +68,7 @@ while ($row = mysqli_fetch_array($query)) {
     </button>
   </div>
   <!-- Carousel -->
+  <!-- Judul -->
   <div class="card mt-4 rounded-1">
     <div class="card-body text-center">
       <h5 class="card-title">SIRUMA - Sistem Informasi Rumah Makan</h5>
@@ -58,4 +78,39 @@ while ($row = mysqli_fetch_array($query)) {
         efisiensi dan pengalaman pelanggan.</p>
     </div>
   </div>
+  <!-- End Judul -->
+  <!-- chart -->
+  <div class="card mt-4 rounded-1">
+    <div class="card-body text-center">
+      <div>
+        <canvas id="myChart"></canvas>
+      </div>
+      <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: [<?php echo $string_menu ?>],
+            datasets: [{
+              label: 'Jumlah Terjual',
+              data: [<?php echo $string_jumlah_pesanan ?>],
+              borderWidth: 1,
+              backgroundColor: [
+                'rgba(245, 40, 145, 0.8)', 'rgba(0, 144, 213, 0.8)', 'rgba(234, 245, 44, 0.8)', 'rgba(49, 234, 34, 0.8)'
+              ]
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
+    </div>
+  </div>
+  <!-- End chart -->
 </div>
