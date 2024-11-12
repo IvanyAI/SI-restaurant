@@ -121,7 +121,7 @@ if (!empty($_SESSION['email_rm'])) {
       </div>
       <button class="btn btn-primary w-100 py-2" type="submit" name="submit_validate" value="abc">Masuk</button>
       <p class="mt-2">Tidak mempunyai akun? <a href="register">Buat Akun</a></p>
-      <p class="mt-5 mb-3 text-body-secondary">&copy; 2023-2024 Ivany</p>
+      <p class="mt-5 mb-3 text-body-secondary">&copy; 2023-<?php echo date("Y") ?> Ivany</p>
     </form>
   </main>
   <script>
