@@ -364,9 +364,6 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
       <button
         class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary disabled" : "btn btn-success"; ?>  ms-3 mb-3 me-1"
         data-bs-toggle="modal" data-bs-target="#tambah_transaksi"><i class=" bi bi-plus-lg"></i> Transaksi</button>
-      <button
-        class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary disabled" : "btn btn-primary"; ?> ms-3 mb-3 me-1"
-        data-bs-toggle="modal" data-bs-target="#bayar"><i class=" bi bi-cash-coin"></i> Bayar</button>
       <button class="btn btn-info">
         Cetak
       </button>

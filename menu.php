@@ -151,8 +151,7 @@ while ($record = mysqli_fetch_array($query)) {
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="submit" class="btn btn-primary" name="validate_input_menu" value="1234">Save
-                      changes</button>
+
                   </div>
                 </form>
               </div>
@@ -278,8 +277,8 @@ while ($record = mysqli_fetch_array($query)) {
 
 
         ?>
-        <div class="table-responsive">
-          <table class="table table-hover">
+        <div class="table-responsive mt-2">
+          <table class="table table-hover" id="example">
             <thead>
               <tr class="text-nowrap">
                 <th scope="col">NO</th>

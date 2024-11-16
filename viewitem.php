@@ -90,7 +90,7 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
             }
             ?>
             <tr>
-              <td colspan="5" class="fw-bold">
+              <td colspan="4" class="fw-bold">
                 Total Harga
               </td>
               <td class="fw-bold">

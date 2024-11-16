@@ -22,10 +22,51 @@ while ($record = mysqli_fetch_array($query)) {
                 <h6 class="card-title"><?php echo $row['kategori'] ?></h6>
                 <p class="card-text"><?php echo $row['keterangan'] ?></p>
                 <p class="card-text">Rp.<?php echo $row['harga'] ?></p>
-                <a href="#" class="btn btn-primary">Pesan</a>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalTambahMenu">Pesan</button>
               </div>
             </div>
           </div>
         <?php } ?>
       </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="ModalTambahMenu" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-fullscreen-md-down">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Tambah Transaksi</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form class="needs-validation" novalidate action="proses/input_transaksi.php" method="post">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="id_transaksi" name="id_transaksi"
+                      value="<?php echo date('ymdHi'), rand(100, 999) ?>" readonly>
+                    <label for="id_transaksi">Kode Transaksi</label>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="pelanggan" placeholder="name pelanggan" name="pelanggan"
+                      required>
+                    <label for="pelanggan">Pelanggan</label>
+                    <div class="invalid-feedback">
+                      Masukkan Nama Pelanggan!
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                <button type="submit" class="btn btn-primary" name="validate_input_order" value="1234">Buat
+                  Transaksi</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- End Transaksi Modal -->
