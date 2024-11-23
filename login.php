@@ -14,6 +14,7 @@ if (!empty($_SESSION['email_rm'])) {
 <title>SIRUMA - Masuk</title>
 <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
 <link rel="stylesheet" href="assets/css/login.css">
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">s
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -144,7 +145,9 @@ if (!empty($_SESSION['email_rm'])) {
         }, false)
       })
     })()
+
   </script>
+
 </body>
 
 </html>

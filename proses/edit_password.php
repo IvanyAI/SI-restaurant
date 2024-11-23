@@ -14,26 +14,26 @@ if (!empty($_POST['edit_pass_validate'])) {
       if ($query) {
         $pesan = '<script>
         alert("Berhasil mengganti password");
-         window.history.back();
-         </script>';
+        window.history.back();
+        </script>';
       } else {
         $pesan = '<script>
         alert("Gagal mengganti password");
-         window.history.back();
+        window.history.back();
         </script>';
       }
 
     } else {
       $pesan = '<script>
         alert(" Password baru tidak sama");
-         window.history.back();
+        window.history.back();
         </script>';
     }
 
   } else {
     $pesan = '<script>
         alert("Password lama tidak benar");
-         window.history.back();
+        window.history.back();
         </script>';
 
   }

@@ -52,7 +52,7 @@ if (isset($_GET['x']) && $_GET['x'] == 'halamanutama') {
     include "main.php";
   }
 } elseif (isset($_GET['x']) && $_GET['x'] == 'pencatatanitem') {
-  if ($_SESSION['level_rm'] == 2) {
+  if (($_SESSION['level_rm'] == 2) || ($_SESSION['level_rm'] == 3)) {
     $page = 'pencatatanitem.php';
     include "main.php";
   } else {

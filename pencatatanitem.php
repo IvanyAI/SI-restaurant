@@ -364,11 +364,54 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
       <button
         class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary disabled" : "btn btn-success"; ?>  ms-3 mb-3 me-1"
         data-bs-toggle="modal" data-bs-target="#tambah_transaksi"><i class=" bi bi-plus-lg"></i> Transaksi</button>
+      <button id="konfirmasiPesananBtn" class="btn btn-success ms-3 mb-3 me-1">
+        <i class="bi bi-plus-lg"></i> Konfirmasi Pesanan
+      </button>
+      <script>
+        // Ambil data pesanan dan buat pesan otomatis
+        document.getElementById("konfirmasiPesananBtn").addEventListener("click", function () {
+          // Ambil data pesanan yang ditampilkan
+          var pesanan = [];
+          var totalHarga = 0;
+          var namaPelanggan = "<?php echo $pelanggan; ?>"; // Nama pelanggan dari PHP
+          var alamatPelanggan = "Alamat: [Masukkan alamat pelanggan di sini]"; // Bisa diisi sesuai dengan data pelanggan yang ada
+
+          <?php if (!empty($result)) { // Pastikan ada data pesanan ?>
+            <?php foreach ($result as $row) { ?>
+              pesanan.push("🍽️ *<?php echo $row['nama_menu']; ?>* - *<?php echo $row['jumlah']; ?>* porsi - Rp. <?php echo number_format($row['harganya'], 0, ',', '.'); ?>");
+              totalHarga += <?php echo $row['harganya']; ?>;
+            <?php } ?>
+          <?php } ?>
+
+          // Cek jika tidak ada pesanan
+          if (pesanan.length === 0) {
+            alert("Masukkan menu terlebih dahulu");
+            return; // Hentikan eksekusi lebih lanjut jika tidak ada pesanan
+          }
+
+          // Format pesan WhatsApp dengan struktur yang menarik
+          var pesan = "^_^ === *SIRUMA Order* === ^_^ \n\n";
+          pesan += "*Nama Pelanggan*: " + namaPelanggan + "\n\n";
+          pesan += "*Pesanan*:\n" + pesanan.join("\n") + "\n\n"; // Daftar pesanan
+          pesan += "*Total Harga*: Rp. " + totalHarga.toLocaleString() + "\n\n"; // Total harga
+          pesan += alamatPelanggan + "\n\n"; // Alamat pelanggan (bisa diubah dengan data yang sesuai)
+          pesan += "(*^_^*) *Terima Kasih* atas pesanan Anda! Kami akan segera memprosesnya. \n";
+          pesan += "<3 *SIRUMA Service* - Selamat menikmati!";
+
+          // Tulis URL WhatsApp dengan pesan otomatis
+          var nomorWA = "6285150009689"; // Ganti dengan nomor WA yang diinginkan
+          var urlWA = "https://wa.me/" + nomorWA + "?text=" + encodeURIComponent(pesan);
+
+          // Arahkan ke URL WhatsApp
+          window.open(urlWA, "_blank");
+        });
+      </script>
       <button
         class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary disabled" : "btn btn-primary"; ?> ms-3 mb-3 me-1"
-        data-bs-toggle="modal" data-bs-target="#bayar"><i class=" bi bi-cash-coin"></i> Bayar</button>
-      <button class="btn btn-info">
-        Cetak
+        data-bs-toggle="modal" data-bs-target="#bayar"><i class=" bi bi-cash-coin"></i> Bayar & Selesai</button>
+      <button
+        class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-primary" : "btn btn-secondary disabled"; ?> ms-3 mb-3 me-1"
+        data-bs-toggle="cetak" data-bs-target="#cetak"><i class=" bi bi-cash-info"></i> Cetak
       </button>
     </div>
   </div>
