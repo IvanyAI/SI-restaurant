@@ -34,7 +34,7 @@ $hasil = mysqli_fetch_array($query);
   <div class="container-lg">
     <div class="row">
       <!-- sidebar -->
-      <?php include "sidebar.php"; ?>
+      <?php (($_SESSION['level_rm'] == 3)) ? " " : include 'sidebar.php'; ?>
       <!-- sidebar -->
       <!--CONTAINER  -->
       <?php

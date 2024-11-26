@@ -1,8 +1,13 @@
 <?php
 session_start();
 if (isset($_GET['x']) && $_GET['x'] == 'halamanutama') {
-  $page = 'home.php';
-  include "main.php";
+  if ($_SESSION['level_rm'] == 3) {
+    $page = 'pemesanan.php';
+    include "main.php";
+  } else {
+    $page = 'home.php';
+    include "main.php";
+  }
 } elseif (isset($_GET['x']) && $_GET['x'] == 'menu') {
   if ($_SESSION['level_rm'] == 1) {
     $page = 'menu.php';

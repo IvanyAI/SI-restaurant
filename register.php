@@ -86,7 +86,7 @@ if (!empty($_SESSION['email_rm'])) {
 
 <body class="d-flex align-items-center text-center  py-4 bg-body-secondary">
   <main class="border rounded bg-light form-signin w-100 m-auto border border-primary-substle ">
-    <form class="needs-validation" novalidate action="proses/register.php" method="post">
+    <form class="needs-validation" novalidate action="proses/login.php" method="post">
       <img style="width:70px" src="assets/img/logo3fix.png" alt="">
       <h2>SIRUMA</h2>
       <h5>
@@ -116,7 +116,7 @@ if (!empty($_SESSION['email_rm'])) {
           </div>
         </div>
 
-        <button class="btn btn-primary w-100 py-2" type="submit" name="submit_validate" value="abc">Daftar</button>
+        <button class="btn btn-primary w-100 py-2" type="submit" name="submitreg_validate" value="abc">Daftar</button>
         <p class="mt-7">Masuk disini <a href="login">Masuk</a></p>
         <p class="mt-5 mb-3 text-body-secondary">&copy; 2023-2024 Ivany</p>
     </form>

@@ -57,6 +57,19 @@ while ($record = mysqli_fetch_array($query)) {
                     </div>
                   </div>
                 </div>
+                <div class="col-lg-12">
+                  <div class="form-floating mb-3">
+                    <select class="form-select" aria-label="Default select example" name="status" required>
+                      <option selected hidden value="">Pilih Type Pemesanan</option>
+                      <option value="Dine IN">Dine IN</option>
+                      <option value="Delivered">Delivered</option>
+                    </select>
+                    <label for="floatingInput">Type Pemesanan</label>
+                    <div class="invalid-feedback">
+                      Pilih Type Pemesanan!
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

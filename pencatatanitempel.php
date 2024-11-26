@@ -21,7 +21,8 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
       Halaman Pencatatan Item
     </div>
     <div class="card-body">
-      <a href="pencatatan" class="btn btn-info mb-3">Kembali</a>
+      <a href="<?php (($_SESSION['level_rm'] == 3)) ? "pemesanan" : "pencatatan"; ?>"
+        class="btn btn-info mb-3">Kembali</a>
       <div class="row">
         <div class="col-lg-6">
           <div class="form-floating mb-3">
@@ -313,7 +314,6 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
               <th scope="col">Harga</th>
               <th scope="col">Qty</th>
               <th scope="col">Status</th>
-              <th scope="col">Catatan</th>
               <th scope="col">Total</th>
               <th scope="col">Aksi</th>
             </tr>
@@ -328,7 +328,6 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
                 <td><?php echo number_format($row['harga'], 0, ',', '.') ?></td>
                 <td><?php echo $row['jumlah'] ?></td>
                 <td><?php echo $row['status'] ?></td>
-                <td><?php echo $row['catatan'] ?></td>
                 <td><?php echo number_format($row['harganya'], 0, ',', '.') ?></td>
                 <td>
                   <div class="d-flex">

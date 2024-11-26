@@ -1,6 +1,6 @@
 <?php
 include("proses/connect.php");
-$query = mysqli_query($db, "SELECT *, SUM(harga*jumlah) AS harganya FROM tb_list_transaksi 
+$query = mysqli_query($db, "SELECT *, SUM(harga*jumlah) AS harganya,tb_transaksi.waktu_transaksi FROM tb_list_transaksi 
 LEFT JOIN tb_transaksi on tb_transaksi.id_transaksi = tb_list_transaksi.transaksi
 LEFT JOIN tb_menu ON tb_menu.id = tb_list_transaksi.menu
 LEFT JOIN tb_bayar ON tb_bayar.id_bayar = tb_transaksi.id_transaksi
@@ -21,7 +21,8 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
       Halaman Pencatatan Item
     </div>
     <div class="card-body">
-      <a href="pencatatan" class="btn btn-info mb-3">Kembali</a>
+      <a href="<?php echo ($_SESSION['level_rm'] == 3) ? "pemesanan" : "pencatatan"; ?>"
+        class="btn btn-info mb-3">Kembali</a>
       <div class="row">
         <div class="col-lg-6">
           <div class="form-floating mb-3">
@@ -312,8 +313,8 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
               <th scope="col">Menu</th>
               <th scope="col">Harga</th>
               <th scope="col">Qty</th>
-              <th scope="col">Status</th>
               <th scope="col">Catatan</th>
+              <th scope="col">Status</th>
               <th scope="col">Total</th>
               <th scope="col">Aksi</th>
             </tr>
@@ -327,8 +328,8 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
                 <td><?php echo $row['nama_menu'] ?></td>
                 <td><?php echo number_format($row['harga'], 0, ',', '.') ?></td>
                 <td><?php echo $row['jumlah'] ?></td>
-                <td><?php echo $row['status'] ?></td>
                 <td><?php echo $row['catatan'] ?></td>
+                <td><?php echo $row['status'] ?></td>
                 <td><?php echo number_format($row['harganya'], 0, ',', '.') ?></td>
                 <td>
                   <div class="d-flex">
@@ -348,7 +349,7 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
             }
             ?>
             <tr>
-              <td colspan="5" class="fw-bold">
+              <td colspan="5  " class="fw-bold">
                 Total Harga
               </td>
               <td class="fw-bold">
@@ -364,8 +365,9 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
       <button
         class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary disabled" : "btn btn-success"; ?>  ms-3 mb-3 me-1"
         data-bs-toggle="modal" data-bs-target="#tambah_transaksi"><i class=" bi bi-plus-lg"></i> Transaksi</button>
-      <button id="konfirmasiPesananBtn" class="btn btn-success ms-3 mb-3 me-1">
-        <i class="bi bi-plus-lg"></i> Konfirmasi Pesanan
+      <button id="konfirmasiPesananBtn"
+        class="<?php echo (!empty($row['id_bayar'])) || ($hasil['level'] == 2) || ($hasil['level'] == 1) ? "btn btn-secondary disabled" : "btn btn-success"; ?>  ms-3 mb-3 me-1"
+        data-bs-toggle="modal" data-bs-target="#konfirmasi"><i class=" bi bi-plus-lg"></i> Konfirmasi Pesanan
       </button>
       <script>
         document.getElementById("konfirmasiPesananBtn").addEventListener("click", function () {
@@ -389,14 +391,14 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
 
           var pesan = "^_^ === *SIRUMA Order* === ^_^ \n\n";
           pesan += "*Nama Pelanggan*: " + namaPelanggan + "\n\n";
-          pesan += "*Pesanan*:\n" + pesanan.join("\n") + "\n\n";
+          pesan += "*Pesanan*: \n" + pesanan.join(" \n ") + "\n\n";
           pesan += "*Total Harga*: Rp. " + totalHarga.toLocaleString() + "\n\n";
           pesan += alamatPelanggan + "\n\n";
           pesan += "(*^_^*) *Terima Kasih* atas pesanan Anda! Kami akan segera memprosesnya. \n";
           pesan += "<3 *SIRUMA Service* - Selamat menikmati!";
 
 
-          var nomorWA = "6285150009689";
+          var nomorWA = "6289519880316";
           var urlWA = "https://wa.me/" + nomorWA + "?text=" + encodeURIComponent(pesan);
 
           window.open(urlWA, "_blank");
@@ -405,7 +407,7 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
       <button
         class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-secondary disabled" : "btn btn-primary"; ?> ms-3 mb-3 me-1"
         data-bs-toggle="modal" data-bs-target="#bayar"><i class=" bi bi-cash-coin"></i> Bayar & Selesai</button>
-      <button
+      <button onclick="print()"
         class="<?php echo (!empty($row['id_bayar'])) ? "btn btn-primary" : "btn btn-secondary disabled"; ?> ms-3 mb-3 me-1"
         data-bs-toggle="cetak" data-bs-target="#cetak"><i class=" bi bi-cash-info"></i> Cetak
       </button>
@@ -413,3 +415,91 @@ $select = mysqli_query($db, "SELECT id,nama_menu FROM tb_menu");
   </div>
 </div>
 </div>
+
+<div id="strukContent" class="d-none">
+  <style>
+    #struk {
+      font-family: "Arial", sans-serif;
+      font-size: 12px;
+      max-width: 300px;
+      border: 1px solid #ccc;
+      padding: 10px;
+      width: 60mm;
+    }
+
+    #struk h2 {
+      text-align: center;
+      color: #ccc;
+    }
+
+    #struk p {
+      margin: 5px 0;
+    }
+
+    #struk table {
+
+      font-size: 12px;
+      border-collapse: collapse;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    #struk th,
+    #struk td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    #struk .total {
+      font-weight: bold;
+    }
+  </style>
+  <div id="struk">
+    <h2>Struk pembayaran SIRUMA</h2>
+    <p>Kode Order : <?php echo $kode ?> </p>
+    <p>Pelanggan : <?php echo $pelanggan ?></p>
+    <p>Waktu Order : <?php echo date('d/m/Y H:i:s', strtotime($result[0]['waktu_transaksi'])) ?> </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Menu</th>
+          <th>Harga</th>
+          <th>Qty</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        $total = 0;
+        foreach ($result as $row) { ?>
+          <tr>
+            <td><?php echo $row['nama_menu'] ?></td>
+            <td><?php echo number_format($row['harga'], 0, ',', '.') ?></td>
+            <td><?php echo $row['jumlah'] ?></td>
+            <td><?php echo number_format($row['harganya'], 0, ',', '.') ?></td>
+          </tr>
+          <?php
+          $total += $row['harganya'];
+        } ?>
+        <tr class="total">
+          <td colspan='3'>Total Harga </td>
+          <td><?php echo number_format($total, 0, ',', '.') ?></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  function print() {
+    var strukContent = document.getElementById("strukContent").innerHTML;
+    var printFrame = document.createElement('iframe');
+    printFrame.style.display = 'none';
+    document.body.appendChild(printFrame);
+    printFrame.contentDocument.write(strukContent);
+    printFrame.contentWindow.print();
+    document.body.removeChild(printFrame);
+  }
+</script>

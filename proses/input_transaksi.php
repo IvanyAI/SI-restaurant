@@ -3,6 +3,7 @@ session_start();
 include("connect.php");
 $kode_transaksi = (isset($_POST['id_transaksi'])) ? htmlentities($_POST['id_transaksi']) : "";
 $pelanggan = (isset($_POST['pelanggan'])) ? htmlentities($_POST['pelanggan']) : "";
+$status = (isset($_POST['status'])) ? htmlentities($_POST['status']) : "";
 
 if (!empty($_POST['validate_input_order'])) {
   $select = mysqli_query($db, "select * from tb_transaksi where id_transaksi='$kode_transaksi'");
@@ -12,7 +13,7 @@ if (!empty($_POST['validate_input_order'])) {
       window.location = '../pencatatan';
       </script>";
   } else {
-    $query = mysqli_query($db, "INSERT INTO tb_transaksi (id_transaksi,pelanggan,kasir) values ('$kode_transaksi','$pelanggan','$_SESSION[id_rm]')");
+    $query = mysqli_query($db, "INSERT INTO tb_transaksi (id_transaksi,pelanggan,kasir,status) values ('$kode_transaksi','$pelanggan','$_SESSION[id_rm]','$status')");
     if (!$query) {
       $pesan = '<script>
     alert("gagal");

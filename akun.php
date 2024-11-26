@@ -167,7 +167,7 @@ while ($record = mysqli_fetch_array($query)) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <form class="needs-validation" novalidate action="proses/edit_akun.php" method="post">
+                <form class="needs-validation" novalidate action="proses/login.php" method="post">
                   <div class="row">
                     <input type="hidden" value="<?php echo $row['id'] ?>" name="id">
                     <div class="col-lg-6">
@@ -230,7 +230,7 @@ while ($record = mysqli_fetch_array($query)) {
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button <?php echo ($row['email'] == $_SESSION['email_rm']) ? ' class="btn btn-danger" disabled' : '' ?>
-                      type="submit" class="btn btn-primary" name="validate_input" value="1234">Save changes</button>
+                      type="submit" class="btn btn-primary" name="resvalidate_input" value="1234">Save changes</button>
                   </div>
                 </form>
               </div>
